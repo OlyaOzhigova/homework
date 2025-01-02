@@ -29,7 +29,7 @@ for contact in contacts_list:
     phone = normalize_phone(contact[5])
     # print("телефон", phone)
 
-    # ключ по которому объединим дубликаты
+    # ключ для дубликатов
     key = (last_name, first_name)
     # print("ключ", key)
 
