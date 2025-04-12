@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Каталог телефонов</title>
+    <style>
+        .catalog-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .phone-card {
+            width: 250px;
+            padding: 15px;
+            border: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-weight: bold; font-size: 22px;">Каталог</h1>
+    
+    <div style="margin-bottom: 20px;">
+        Сортировка:
+        <a href="?sort=name">по названию</a>,
+        <a href="?sort=min_price">начиная с дечевых</a>,
+        <a href="?sort=max_price">начиная с дорогих</a>
+    </div>
+
+    <div class="catalog-container">
+        {% for phone in phones %}
+            <div class="phone-card">
+                <h2 style="font-weight: bold; color: blue; font-size: 20px;">{{ phone.name }}</h2>
+                <p style="font-weight: bold; color: black; font-size: 18px;">{{ phone.price }} руб.</p>
+                <img src="{{ phone.image }}" alt="{{ phone.name }}" width="200">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
