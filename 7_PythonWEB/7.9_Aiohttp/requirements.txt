@@ -1,0 +1,5 @@
+aiohttp==3.8.4
+sqlalchemy[asyncio]==1.4.46
+aiosqlite==0.18.0
+python-dotenv==1.0.0
+marshmallow==3.19.0
