@@ -1,0 +1,31 @@
+{% extends "articles/base.html" %}
+{% load static %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+  <div class="row">
+    {% for article in object_list %}
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+          <a href="#">
+            <img class="card-img-top" src="{{ article.image.url }}" alt="{{ article.title }}">
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">{{ article.title }}</a>
+            </h4>
+            <p class="card-text" style="color: black; font-size: 14px;">{{ article.text }}</p>
+            <div class="tags">
+              {% for scope in article.scopes.all %}
+                <span class="badge {% if scope.is_main %}badge-primary{% else %}badge-secondary{% endif %}">
+                  {{ scope.tag.name }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,2 @@
+2025-01-11 00:15:05,493 - root - INFO - Function 'write_result_file' called with args=([('3.3_2.txt', ['Строка номер 1 файла номер 2']), ('3.3_1.txt', ['Строка номер 1 файла номер 1\n', 'Строка номер 2 файла номер 1'])], 'result.txt'), kwargs={}, returned None
+2025-01-11 00:29:51,018 - root - INFO - Function 'write_result_file' called with args=([('3.3_2.txt', ['Строка номер 1 файла номер 2']), ('3.3_1.txt', ['Строка номер 1 файла номер 1\n', 'Строка номер 2 файла номер 1'])], 'result.txt'), kwargs={}, returned None

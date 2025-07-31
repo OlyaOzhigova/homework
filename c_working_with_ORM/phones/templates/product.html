@@ -1,0 +1,5 @@
+<h1>{{ phone.name }}</h1>
+<p>Цена: {{ phone.price }}</p>
+<p>Дата выпуска: {{ phone.release_date }}</p>
+<p>LTE: {% if phone.lte_exists %}Да{% else %}Нет{% endif %}</p>
+<img src="{{ phone.image }}" alt="{{ phone.name }}">
