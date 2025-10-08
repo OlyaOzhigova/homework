@@ -58,17 +58,45 @@ class User(AbstractUser):
         verbose_name_plural = "Список пользователей"
 
 class Shop(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Название')
-    url = models.URLField(verbose_name='Ссылка', null=True, blank=True)
-    user = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, null=True, blank=True)
-    state = models.BooleanField(verbose_name='статус получения заказов', default=True)
-
-    class Meta:
-        verbose_name = 'Магазин'
-        verbose_name_plural = "Список магазинов"
+    name = models.CharField(max_length=50, verbose_name='Название магазина')
+    url = models.URLField(verbose_name='URL магазина', blank=True, null=True)
+    user = models.OneToOneField(User, verbose_name='Владелец', on_delete=models.CASCADE, null=True, blank=True)
+    state = models.BooleanField(verbose_name='Статус получения заказов', default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_active(self):
+        """Проверка, активен ли магазин"""
+        return self.state
+
+    def get_products_count(self):
+        """Количество товаров в магазине"""
+        return self.product_infos.count()
+
+    def get_categories(self):
+        """Категории магазина"""
+        return self.categories.all()
+
+    def get_orders(self):
+        """Заказы для этого магазина"""
+        return Order.objects.filter(
+            ordered_items__product_info__shop=self
+        ).exclude(state='basket').distinct()
+
+    def toggle_state(self):
+        """Переключить статус магазина"""
+        self.state = not self.state
+        self.save()
+        return self.state
+
+    class Meta:
+        verbose_name = 'Магазин'
+        verbose_name_plural = 'Магазины'
+        ordering = ['name']
 
 class Category(models.Model):
     name = models.CharField(max_length=40, verbose_name='Название')
