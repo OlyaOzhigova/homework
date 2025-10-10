@@ -1,16 +1,15 @@
 from django.http import JsonResponse
 from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
+from rest_framework import status
 import os
 import yaml
 from django.conf import settings
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.generics import ListAPIView
-from .models import Category, Shop, ProductInfo
-from .serializers import CategorySerializer, ShopSerializer, ProductInfoSerializer
+from .models import Category, Shop, ProductInfo, Product, Parameter, ProductParameter
+from .serializers import CategorySerializer, ShopSerializer, ProductInfoSerializer                                                                                                  
 
-
-# тетст
+# тест
 def test_view(request):
     return JsonResponse({'status': 'success', 'message': 'API is working!'})
 
@@ -28,16 +27,17 @@ class ProductInfoView(APIView):
         products = ProductInfo.objects.filter(shop__state=True)
         serializer = ProductInfoSerializer(products, many=True)
         return Response(serializer.data)
+
 class ImportProducts(APIView):
     def post(self, request):
         try:
-            # новая папка если нет
+            # папка
             data_dir = os.path.join(settings.BASE_DIR, 'data')
             os.makedirs(data_dir, exist_ok=True)
             
             file_path = os.path.join(data_dir, 'shop1.yaml')
             
-            # тест
+            # null
             if not os.path.exists(file_path):
                 sample_data = {
                     'shop': 'Тестовый магазин',
@@ -67,7 +67,7 @@ class ImportProducts(APIView):
             shop_name = data['shop']
             shop, created = Shop.objects.get_or_create(name=shop_name)
             
-            # категории
+            # категория
             for category_data in data['categories']:
                 category, _ = Category.objects.get_or_create(
                     id=category_data['id'],
@@ -75,7 +75,7 @@ class ImportProducts(APIView):
                 )
                 category.shops.add(shop)
             
-            # товар
+            # товары
             imported_count = 0
             for product_data in data['goods']:
                 try:
@@ -105,6 +105,78 @@ class ImportProducts(APIView):
                             product_info=product_info,
                             parameter=parameter,
                             defaults={'value': str(param_value)}
+                        )
+                    
+                    imported_count += 1
+                    
+                except Exception as e:
+                    print(f"Ошибка при импорте товара {product_data.get('name')}: {e}")
+                    continue
+            
+            return Response({
+                'status': 'success',
+                'message': f'Импортировано {imported_count} товаров из магазина {shop_name}',
+                'shop': shop_name,
+                'imported_count': imported_count
+            })
+            
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+class ImportProductsForce(APIView):
+    def post(self, request):
+        try:
+            data_dir = os.path.join(settings.BASE_DIR, 'data')
+            file_path = os.path.join(data_dir, 'shop1.yaml')
+            
+            with open(file_path, 'r', encoding='utf-8') as file:
+                data = yaml.safe_load(file)
+            
+            shop_name = data['shop']
+            shop, created = Shop.objects.get_or_create(name=shop_name)
+            
+            # удаление данных
+            ProductInfo.objects.filter(shop=shop).delete()
+            
+            # обрабатка категории
+            for category_data in data['categories']:
+                category, _ = Category.objects.get_or_create(
+                    id=category_data['id'],
+                    defaults={'name': category_data['name']}
+                )
+                category.shops.add(shop)
+            
+            # обрабатка товаров
+            imported_count = 0
+            for product_data in data['goods']:
+                try:
+                    category = Category.objects.get(id=product_data['category'])
+                    
+                    product, _ = Product.objects.get_or_create(
+                        name=product_data['name'],
+                        category=category
+                    )
+                    
+                    product_info = ProductInfo.objects.create(
+                        product=product,
+                        shop=shop,
+                        external_id=product_data['id'],
+                        model=product_data.get('model', ''),
+                        quantity=product_data['quantity'],
+                        price=product_data['price'],
+                        price_rrc=product_data['price_rrc']
+                    )
+                    
+                    # параметры
+                    for param_name, param_value in product_data.get('parameters', {}).items():
+                        parameter, _ = Parameter.objects.get_or_create(name=param_name)
+                        ProductParameter.objects.create(
+                            product_info=product_info,
+                            parameter=parameter,
+                            value=str(param_value)
                         )
                     
                     imported_count += 1
