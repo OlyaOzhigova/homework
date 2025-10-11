@@ -6,7 +6,7 @@ from django.utils import timezone
 
 # статитическме данные
 STATE_CHOICES = (
-    ('basket', 'Статус корзины'),
+    ('basket', 'Статус корзины'), 
     ('new', 'Новый'),
     ('confirmed', 'Подтвержден'),
     ('assembled', 'Собран'),
@@ -16,13 +16,13 @@ STATE_CHOICES = (
 )
 
 USER_TYPE_CHOICES = (
-    ('shop', 'Магазин'),
-    ('buyer', 'Покупатель'),
+    ('shop', 'Магазин'), #поставщик
+    ('buyer', 'Покупатель'),  
 )
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
-
+    # создания пользователя (внутренний)
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('The given email must be set')
@@ -31,7 +31,8 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
+        
+        # создания обычного пользователя
     def create_user(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
@@ -100,6 +101,7 @@ class User(AbstractUser):
         }
 
 class Shop(models.Model):
+    """поставщик - пользователь shop """
     name = models.CharField(max_length=50)
     url = models.URLField(blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -113,6 +115,7 @@ class Shop(models.Model):
         verbose_name_plural = 'Магазины'
 
 class Category(models.Model):
+    """категории -магазин(ManyToMany) """
     name = models.CharField(max_length=40)
     shops = models.ManyToManyField(Shop, related_name='categories', blank=True)
 
@@ -124,6 +127,7 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 class Product(models.Model):
+    """инфо о товаре"""
     name = models.CharField(max_length=80)
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
 
@@ -135,6 +139,7 @@ class Product(models.Model):
         verbose_name_plural = 'Продукты'
 
 class ProductInfo(models.Model):
+    """информация о товаре в магазине"""
     model = models.CharField(max_length=80, blank=True)
     external_id = models.PositiveIntegerField()
     product = models.ForeignKey(Product, related_name='product_infos', on_delete=models.CASCADE)
@@ -154,6 +159,7 @@ class ProductInfo(models.Model):
         return f"{self.product.name} - {self.shop.name}"
 
 class Parameter(models.Model):
+    """характеристики товара"""
     name = models.CharField(max_length=40)
 
     def __str__(self):
@@ -164,6 +170,7 @@ class Parameter(models.Model):
         verbose_name_plural = 'Параметры'
 
 class ProductParameter(models.Model):
+    """связь характеристики - товар"""
     product_info = models.ForeignKey(ProductInfo, related_name='product_parameters', on_delete=models.CASCADE)
     parameter = models.ForeignKey(Parameter, related_name='product_parameters', on_delete=models.CASCADE)
     value = models.CharField(max_length=100)
@@ -176,6 +183,7 @@ class ProductParameter(models.Model):
         ]
 
 class Contact(models.Model):
+    """информация о адресе покупателя"""
     user = models.ForeignKey(User, related_name='contacts', on_delete=models.CASCADE)
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=100)
@@ -193,6 +201,7 @@ class Contact(models.Model):
         verbose_name_plural = 'Контакты'
 
 class Order(models.Model):
+    """информация о заказе"""
     user = models.ForeignKey(User, related_name='orders', on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
     state = models.CharField(choices=STATE_CHOICES, max_length=15, default='basket')
@@ -207,6 +216,7 @@ class Order(models.Model):
         ordering = ['-dt']
 
 class OrderItem(models.Model):
+    """элемент заказа"""
     order = models.ForeignKey(Order, related_name='ordered_items', on_delete=models.CASCADE)
     product_info = models.ForeignKey(ProductInfo, related_name='ordered_items', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
