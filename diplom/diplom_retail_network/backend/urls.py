@@ -11,7 +11,7 @@ urlpatterns = [
     #авторизация пользователя(тоекн)
     path('user/login', views.LoginAccount.as_view(), name='user-login'),
     
-    #просмотр и редаутирование данных пользователя
+    #просмотр и редактирование данных пользователя
     path('user/details', views.AccountDetails.as_view(), name='user-details'),  
     
     #сброс пароля (email+токен)
