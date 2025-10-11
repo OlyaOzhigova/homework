@@ -1,10 +1,21 @@
 from rest_framework import serializers
 from .models import User, Category, Shop, Product, ProductInfo, Parameter, ProductParameter, Contact, Order, OrderItem
 
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('id', 'city', 'street', 'house', 'structure', 'building', 'apartment', 'user', 'phone')
+        read_only_fields = ('id',)
+        extra_kwargs = {
+            'user': {'write_only': True}
+        }
+
 class UserSerializer(serializers.ModelSerializer):
+    contacts = ContactSerializer(read_only=True, many=True)
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'company', 'position', 'type')
+        fields = ('id', 'first_name', 'last_name', 'email', 'company', 'position', 'type', 'contacts')
         read_only_fields = ('id',)
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -47,15 +58,6 @@ class ProductInfoSerializer(serializers.ModelSerializer):
         model = ProductInfo
         fields = ('id', 'model', 'product', 'shop', 'quantity', 'price', 'price_rrc', 'product_parameters')
         read_only_fields = ('id',)
-
-class ContactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = ('id', 'city', 'street', 'house', 'structure', 'building', 'apartment', 'user', 'phone')
-        read_only_fields = ('id',)
-        extra_kwargs = {
-            'user': {'write_only': True}
-        }
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
