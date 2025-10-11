@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import User, Category, Shop, Product, ProductInfo, Parameter, ProductParameter, Contact, Order, OrderItem
 
 class ContactSerializer(serializers.ModelSerializer):
+    """сериализатор по адресам доставки"""
     class Meta:
         model = Contact
         fields = ('id', 'city', 'street', 'house', 'structure', 'building', 'apartment', 'user', 'phone')
@@ -11,6 +12,7 @@ class ContactSerializer(serializers.ModelSerializer):
         }
 
 class UserSerializer(serializers.ModelSerializer):
+    """сериализатор информации по пользователю"""
     contacts = ContactSerializer(read_only=True, many=True)
 
     class Meta:
@@ -19,18 +21,21 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class CategorySerializer(serializers.ModelSerializer):
+    """сериализатор по категориям"""
     class Meta:
         model = Category
         fields = ('id', 'name')
         read_only_fields = ('id',)
 
 class ShopSerializer(serializers.ModelSerializer):
+    """сериализатор по поставщикам"""
     class Meta:
         model = Shop
         fields = ('id', 'name', 'state', 'url')
         read_only_fields = ('id',)
 
 class ProductSerializer(serializers.ModelSerializer):
+    """сериализатор по товарам id - StringRelatedField - строка """
     category = serializers.StringRelatedField()
     
     class Meta:
@@ -38,11 +43,13 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'category')
 
 class ParameterSerializer(serializers.ModelSerializer):
+    """сериализатор по характеристикам товаров"""
     class Meta:
         model = Parameter
         fields = ('id', 'name')
 
 class ProductParameterSerializer(serializers.ModelSerializer):
+    """связь характеристики - товар"""
     parameter = serializers.StringRelatedField()
     
     class Meta:
@@ -50,6 +57,7 @@ class ProductParameterSerializer(serializers.ModelSerializer):
         fields = ('parameter', 'value')
 
 class ProductInfoSerializer(serializers.ModelSerializer):
+    """сериализатор по иформации о товаре в магазине"""
     product = ProductSerializer(read_only=True)
     shop = ShopSerializer(read_only=True)
     product_parameters = ProductParameterSerializer(many=True, read_only=True)
@@ -60,6 +68,7 @@ class ProductInfoSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    """сериализатор по элементам заказа"""
     class Meta:
         model = OrderItem
         fields = ('id', 'product_info', 'quantity', 'order')
@@ -69,9 +78,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
         }
 
 class OrderItemCreateSerializer(OrderItemSerializer):
+    """сериализатор по элементам заказа + информация о товарке"""
     product_info = ProductInfoSerializer(read_only=True)
 
 class OrderSerializer(serializers.ModelSerializer):
+    """сериализатор по заказам (товары, количество, доставка)"""
     ordered_items = OrderItemCreateSerializer(read_only=True, many=True)
     total_sum = serializers.IntegerField()
     contact = ContactSerializer(read_only=True)
