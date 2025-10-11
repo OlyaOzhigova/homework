@@ -35,7 +35,7 @@ class ShopSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class ProductSerializer(serializers.ModelSerializer):
-    """сериализатор по товарам id - StringRelatedField - строка """
+    """сериализатор по товарам id - StringRelatedField(отображение тип - строка) """
     category = serializers.StringRelatedField()
     
     class Meta:
