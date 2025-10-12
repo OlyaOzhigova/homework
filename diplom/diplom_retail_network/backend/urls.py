@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'backend'
 urlpatterns = [
-    """ ===== ПОЛЬЗОВАТЕЛИ ===== """
+    # ===== ПОЛЬЗОВАТЕЛИ ===== 
     #регистрация пользователя
     path('user/register', views.RegisterAccount.as_view(), name='user-register'),
     
@@ -20,14 +20,14 @@ urlpatterns = [
     #подтверждение сброса пароля (email+токен)
     path('user/password_reset/confirm', reset_password_confirm, name='password-reset-confirm'),
 
-    """ ===== ПОСТАВЩИКИ ===== """
+    # ===== ПОСТАВЩИКИ ===== 
     #добавление , обновление товароа
     path('partner/update', views.ImportProducts.as_view(), name='partner-update'),
     #обновление, удаление старызх данных
     path('partner/update/force', views.ImportProductsForce.as_view(), name='partner-update-force'),
 
 
-    """ ===== ТОВАРЫ ===== """
+    # ===== ТОВАРЫ ===== 
     #получение всех категорий
     path('categories', views.CategoryView.as_view(), name='categories'),
     
