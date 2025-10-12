@@ -37,7 +37,7 @@ urlpatterns = [
     #поиск и фильтрация товаров
     path('products', views.ProductInfoView.as_view(), name='products'),
 
-    """ ===== ЗАКАЗЫ и КОРЗИНА ===== """
+    # ===== ЗАКАЗЫ и КОРЗИНА ===== 
     
     #корзина(просмотр, добавление, удаление, обновление)
     path('basket', views.BasketView.as_view(), name='basket'),
