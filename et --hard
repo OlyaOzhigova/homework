@@ -1,0 +1,51 @@
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/__init__.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/__init__.cpython-312.pyc[m
+[1mindex ab08502..5c555a2 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/__init__.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/__init__.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/current_thread_executor.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/current_thread_executor.cpython-312.pyc[m
+[1mindex ea0e917..92b3633 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/current_thread_executor.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/current_thread_executor.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/local.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/local.cpython-312.pyc[m
+[1mindex 75d31ff..72a3e78 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/local.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/local.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/sync.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/sync.cpython-312.pyc[m
+[1mindex c7bc47a..3fdaedb 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/sync.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/asgiref/__pycache__/sync.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/__init__.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/__init__.cpython-312.pyc[m
+[1mindex cd3be2b..104a632 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/__init__.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/__init__.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/core.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/core.cpython-312.pyc[m
+[1mindex db50014..d342858 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/core.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/certifi/__pycache__/core.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/__init__.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/__init__.cpython-312.pyc[m
+[1mindex 3e9da9c..7e619f8 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/__init__.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/__init__.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/api.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/api.cpython-312.pyc[m
+[1mindex 04836de..3be8546 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/api.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/api.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/cd.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/cd.cpython-312.pyc[m
+[1mindex dc0b409..d13ca66 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/cd.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/cd.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/constant.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/constant.cpython-312.pyc[m
+[1mindex 1f721d2..7f68a58 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/constant.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/constant.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/legacy.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/legacy.cpython-312.pyc[m
+[1mindex be5fbd3..8b12d14 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/legacy.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/legacy.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/models.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/models.cpython-312.pyc[m
+[1mindex f80e8ec..4e96951 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/models.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/models.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/utils.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/utils.cpython-312.pyc[m
+[1mindex a514d37..3995a93 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/utils.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/utils.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/version.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/version.cpython-312.pyc[m
+[1mindex d66e4ce..9b4a4ab 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/version.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/charset_normalizer/__pycache__/version.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/__init__.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/__init__.cpython-312.pyc[m
+[1mindex 8400f08..b8e65d1 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/__init__.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/__init__.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/shortcuts.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/shortcuts.cpython-312.pyc[m
+[1mindex 2dde11e..8697672 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/shortcuts.cpython-312.pyc and b/diplom/diplom_project/lib/python3.12/site-packages/django/__pycache__/shortcuts.cpython-312.pyc differ
+[1mdiff --git a/diplom/diplom_project/lib/python3.12/site-packages/django/apps/__pycache__/__init__.cpython-312.pyc b/diplom/diplom_project/lib/python3.12/site-packages/django/apps/__pycache__/__init__.cpython-312.pyc[m
+[1mindex 22a8a3b..a5f75cc 100644[m
+Binary files a/diplom/diplom_project/lib/python3.12/site-packages/django/apps/__pycache__/__init__.cpython-31
