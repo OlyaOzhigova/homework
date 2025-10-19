@@ -1,0 +1,42 @@
+НОВЫЙ ЗАКАЗ #{{ order.id }}
+==============================
+
+Дата заказа: {{ order.dt|date:"d.m.Y H:i" }}
+
+ИНФОРМАЦИЯ О ПОКУПАТЕЛЕ:
+------------------------------
+Имя: {{ user.first_name }} {{ user.last_name }}
+Email: {{ user.email }}
+Телефон: {{ user.phone|default:"Не указан" }}
+{% if user.company %}Компания: {{ user.company }}{% endif %}
+
+АДРЕС ДОСТАВКИ:
+------------------------------
+Город: {{ contact.city }}
+Улица: {{ contact.street }}
+Дом: {{ contact.house }}
+{% if contact.building %}Корпус: {{ contact.building }}{% endif %}
+{% if contact.structure %}Строение: {{ contact.structure }}{% endif %}
+{% if contact.apartment %}Квартира: {{ contact.apartment }}{% endif %}
+Телефон: {{ contact.phone }}
+
+СОСТАВ ЗАКАЗА:
+------------------------------
+{% for item in items %}
+ТОВАР: {{ item.product_info.product.name }}
+Магазин: {{ item.product_info.shop.name }}
+Модель: {{ item.product_info.model|default:"Не указана" }}
+Количество: {{ item.quantity }} шт.
+Цена: {{ item.product_info.price }} руб./шт.
+Сумма: {% widthratio item.quantity 1 item.product_info.price %} руб.
+---
+{% endfor %}
+
+ИТОГО: {{ order.total_sum }} руб.
+
+СТАТУС: {{ order.get_state_display }}
+
+Требуется обработка в панели администратора!
+
+--
+Автоматическое уведомление системы

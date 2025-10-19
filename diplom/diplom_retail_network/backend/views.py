@@ -17,6 +17,8 @@ from ujson import loads as load_json
 from .models import User, Category, Shop, ProductInfo, Product, Parameter, ProductParameter, Contact, Order, OrderItem
 from .serializers import (UserSerializer, CategorySerializer, ShopSerializer, ProductInfoSerializer,
                          ContactSerializer, OrderSerializer, OrderItemSerializer)
+from .tasks import send_order_confirmation_email, send_order_to_admin_email
+
 
 # тест
 def test_view(request):
@@ -331,7 +333,11 @@ class OrderView(APIView):
                 return JsonResponse({'Status': False, 'Errors': 'Неправильно указаны аргументы'})
             else:
                 if is_updated:
-                    return JsonResponse({'Status': True})
+                    # АСИНХРОННАЯ отправка email через Celery
+                    send_order_confirmation_email.delay(order_id)
+                    send_order_to_admin_email.delay(order_id)
+                    
+                    return JsonResponse({'Status': True, 'Message': 'Заказ подтвержден. Email отправлен.'})
                 else:
                     return JsonResponse({'Status': False, 'Errors': 'Заказ не найден'})
 

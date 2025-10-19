@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Новый заказ #{{ order.id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .order-info {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #dc3545;
+            text-align: right;
+        }
+        .status-new {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> Новый заказ #{{ order.id }}</h1>
+        <p>Поступил в {{ order.dt|date:"d.m.Y H:i" }}</p>
+    </div>
+
+    <div class="order-info">
+        <h2>Информация о покупателе</h2>
+        <p><strong>Покупатель:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Телефон:</strong> {{ user.phone|default:"Не указан" }}</p>
+        {% if user.company %}
+        <p><strong>Компания:</strong> {{ user.company }}</p>
+        {% endif %}
+    </div>
+
+    <div class="order-info">
+        <h2>Адрес доставки</h2>
+        <p>
+            {{ contact.city }}, 
+            ул. {{ contact.street }}, 
+            д. {{ contact.house }}
+            {% if contact.building %}корп. {{ contact.building }}{% endif %}
+            {% if contact.structure %}стр. {{ contact.structure }}{% endif %}
+            {% if contact.apartment %}кв. {{ contact.apartment }}{% endif %}
+        </p>
+        <p><strong>Телефон для связи:</strong> {{ contact.phone }}</p>
+    </div>
+
+    <h2>Состав заказа</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Магазин</th>
+                <th>Модель</th>
+                <th>Количество</th>
+                <th>Цена за шт.</th>
+                <th>Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product_info.product.name }}</td>
+                <td>{{ item.product_info.shop.name }}</td>
+                <td>{{ item.product_info.model|default:"—" }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product_info.price }} руб.</td>
+                <td>{% widthratio item.quantity 1 item.product_info.price %} руб.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total">
+        Общая сумма заказа: {{ order.total_sum }} руб.
+    </div>
+
+    <div class="order-info">
+        <h2>Статус заказа</h2>
+        <p class="status-new"> {{ order.get_state_display|upper }}</p>
+        <p><em>Требуется обработка в панели администратора</em></p>
+    </div>
+
+    <hr>
+    <p style="color: #6c757d; font-size: 0.9em;">
+        Это автоматическое уведомление. Не отвечайте на это письмо.
+    </p>
+</body>
+</html>

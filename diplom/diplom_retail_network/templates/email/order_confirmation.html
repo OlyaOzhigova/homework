@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Подтверждение заказа</title>
+</head>
+<body>
+    <h2>Уважаемый(ая) {{ user.first_name }} {{ user.last_name }},</h2>
+    <p>Ваш заказ <strong>#{{ order.id }}</strong> успешно оформлен!</p>
+    
+    <h3>Детали заказа:</h3>
+    <table border="1" cellpadding="8" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Магазин</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Сумма</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product_info.product.name }}</td>
+                <td>{{ item.product_info.shop.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product_info.price }} руб.</td>
+                <td>{{ item.quantity|floatformat:2 }} × {{ item.product_info.price }} = {% widthratio item.quantity 1 item.product_info.price %} руб.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p><strong>Общая сумма: {{ order.total_sum }} руб.</strong></p>
+    
+    <p>Спасибо за ваш заказ!</p>
+</body>
+</html>
