@@ -5,9 +5,19 @@ omit =
     */tests/*
     */admin.py
     */apps.py
+    */signals.py
 
 [report]
 exclude_lines =
     pragma: no cover
     def __str__
     raise NotImplementedError
+    if self.debug:
+    if settings.DEBUG
+    if DEBUG
+    logger\.
+    pass
+
+[html]
+directory = htmlcov
+title = Coverage Report
