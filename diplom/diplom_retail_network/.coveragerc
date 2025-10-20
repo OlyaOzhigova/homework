@@ -1,0 +1,13 @@
+[run]
+source = backend
+omit = 
+    */migrations/*
+    */tests/*
+    */admin.py
+    */apps.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __str__
+    raise NotImplementedError
