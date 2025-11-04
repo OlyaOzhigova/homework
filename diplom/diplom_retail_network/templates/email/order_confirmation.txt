@@ -1,1 +1,22 @@
+Уважаемый(ая) {{ user.first_name }} {{ user.last_name }},
 
+Ваш заказ #{{ order.id }} успешно оформлен!
+
+Детали заказа:
+{% for item in items %}
+- Товар: {{ item.product_info.product.name }}
+  Магазин: {{ item.product_info.shop.name }}
+  Количество: {{ item.quantity }}
+  Цена: {{ item.product_info.price }} руб.
+  Сумма: {{ item.quantity }} × {{ item.product_info.price }} = {% widthratio item.quantity 1 item.product_info.price %} руб.
+{% endfor %}
+
+Общая сумма заказа: {{ order.total_sum }} руб.
+
+Статус заказа: {{ order.get_state_display }}
+
+Спасибо за ваш заказ!
+Мы свяжемся с вами для уточнения деталей доставки.
+
+С уважением,
+Команда интернет-магазина
