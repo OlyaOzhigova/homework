@@ -8,6 +8,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -18,7 +19,46 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_rest_passwordreset',
     'backend',
+    'drf_spectacular',
+    'social_django',
+    'baton.autodiscover',
 ]
+
+BATON = {
+    'SITE_HEADER': 'Retail Network Admin',
+    'SITE_TITLE': 'Retail Network',
+    'INDEX_TITLE': 'Администрирование розничной сети',
+    'SUPPORT_HREF': 'mailto:support@example.com',
+    'COPYRIGHT': 'copyright © 2025 Retail Network',
+    'POWERED_BY': '<a href="https://github.com/your-repo">Retail Network Team</a>',
+}
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# VK настройки
+SOCIAL_AUTH_VK_OAUTH2_KEY = 'your_vk_app_id'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'your_vk_secret_key'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+# GitHub настройки  
+SOCIAL_AUTH_GITHUB_KEY = 'your_github_client_id'
+SOCIAL_AUTH_GITHUB_SECRET = 'your_github_secret_key'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,6 +124,22 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.AnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '1000/day',
+        'anon': '100/day',
+    },
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Retail Network API',
+    'DESCRIPTION': 'API для автоматизации розничной сети',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 # для Celery(асинхронные задачи)
