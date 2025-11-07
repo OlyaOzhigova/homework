@@ -1,6 +1,7 @@
 from django.urls import path
 from django_rest_passwordreset.views import reset_password_request_token, reset_password_confirm
 from . import views
+from .views_debug import TestErrorView, PerformanceTestView
 
 app_name = 'backend'
 urlpatterns = [
@@ -48,6 +49,8 @@ urlpatterns = [
     #заказ (оформление, просмотр истории)
     path('order', views.OrderView.as_view(), name='order'),
 
-    #для теста
+    # мониторинг и отладка (вместо SENTRY)
+    path('debug/error-test', TestErrorView.as_view(), name='error-test'),
+    path('debug/performance-test', PerformanceTestView.as_view(), name='performance-test'),    
     path('test', views.test_view, name='test'),
 ]

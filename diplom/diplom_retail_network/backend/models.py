@@ -62,6 +62,8 @@ class User(AbstractUser):
     
     # необязатлеьный параметр - username
     username = models.CharField(max_length=150, blank=True, null=True)
+    # изображения
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     
     class Meta:
         verbose_name = 'Пользователь'
@@ -137,6 +139,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
 
 class ProductInfo(models.Model):
     """информация о товаре в магазине"""
@@ -206,7 +209,15 @@ class Order(models.Model):
     dt = models.DateTimeField(auto_now_add=True)
     state = models.CharField(choices=STATE_CHOICES, max_length=15, default='basket')
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE, null=True, blank=True)
-
+    
+    @property
+    def total_sum(self):
+        """Вычисление общей суммы заказа"""
+        return sum(
+            item.quantity * item.product_info.price 
+            for item in self.ordered_items.all()
+        )
+        
     def __str__(self):
         return f'Order {self.id} - {self.user.email}'
 

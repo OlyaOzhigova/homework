@@ -95,6 +95,9 @@ class TestContactViews:
         }
         
         response = api_client.post(url, data, format='json')
+        #assert response.status_code == status.HTTP_403_FORBIDDEN
+        #assert response.json()['Status'] is False
+        #assert 'Log in required' in response.json()['Error']
         assert response.status_code == status.HTTP_200_OK
         assert response.json()['Status'] is True
         assert Contact.objects.filter(user=user, city='Барнаул').exists()
@@ -110,10 +113,11 @@ class TestContactViews:
         }
         
         response = api_client.post(url, data, format='json')
-        assert response.status_code == status.HTTP_200_OK
+        #assert response.status_code == status.HTTP_200_OK
+        assert response.status_code == status.HTTP_403_FORBIDDEN
         assert response.json()['Status'] is False
         assert 'Log in required' in response.json()['Error']
-
+        
     def test_get_contacts_list(self, api_client):
         """Тест получения списка контактов"""
         user = UserFactory()

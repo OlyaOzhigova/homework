@@ -84,10 +84,18 @@ class OrderItemCreateSerializer(OrderItemSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     """сериализатор по заказам (товары, количество, доставка)"""
     ordered_items = OrderItemCreateSerializer(read_only=True, many=True)
-    total_sum = serializers.IntegerField()
+    total_sum = serializers.SerializerMethodField()
     contact = ContactSerializer(read_only=True)
 
     class Meta:
         model = Order
         fields = ('id', 'ordered_items', 'state', 'dt', 'total_sum', 'contact')
         read_only_fields = ('id',)
+
+    def get_total_sum(self, obj):
+        
+        # получить сумму из аннотации
+        if hasattr(obj, 'annotated_total_sum'):
+            return obj.annotated_total_sum
+        # иначе используем property
+        return obj.total_sum
