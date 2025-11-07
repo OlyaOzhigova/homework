@@ -8,3 +8,5 @@
 {"timestamp": "2025-11-07T19:40:16.655180", "level": "info", "message": "Тестовое сообщение через ErrorMonitor", "context": {}}
 {"timestamp": "2025-11-07T20:01:35.490861", "level": "info", "message": "Тестовое сообщение через ErrorMonitor", "context": {}}
 {"timestamp": "2025-11-07T20:02:22.922368", "level": "info", "message": "Тестовое сообщение через ErrorMonitor", "context": {}}
+{"timestamp": "2025-11-07T20:45:24.181957", "level": "info", "message": "Тестовое сообщение через ErrorMonitor", "context": {}}
+{"timestamp": "2025-11-07T20:49:21.485161", "level": "info", "message": "Тестовое сообщение через ErrorMonitor", "context": {}}

@@ -756,3 +756,9 @@ ERROR 2025-11-07 20:01:35,492 log Internal Server Error: /api/debug/error-test
 ERROR 2025-11-07 20:02:22,922 views_debug Error message - ошибка
 ERROR 2025-11-07 20:02:22,922 error_monitoring Error captured: ValueError: Это тестовая ошибка для проверки мониторинга!
 ERROR 2025-11-07 20:02:22,924 log Internal Server Error: /api/debug/error-test
+ERROR 2025-11-07 20:45:24,181 views_debug Error message - ошибка
+ERROR 2025-11-07 20:45:24,183 error_monitoring Error captured: ValueError: Это тестовая ошибка для проверки мониторинга!
+ERROR 2025-11-07 20:45:24,185 log Internal Server Error: /api/debug/error-test
+ERROR 2025-11-07 20:49:21,485 views_debug Error message - ошибка
+ERROR 2025-11-07 20:49:21,485 error_monitoring Error captured: ValueError: Это тестовая ошибка для проверки мониторинга!
+ERROR 2025-11-07 20:49:21,487 log Internal Server Error: /api/debug/error-test

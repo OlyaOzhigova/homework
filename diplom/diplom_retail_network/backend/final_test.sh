@@ -1,5 +1,3 @@
-#!/bin/bash
-
 BASE_URL="http://localhost:8000/api"
 EMAIL="test@mail.ru"
 PASSWORD="TestPassword123"
